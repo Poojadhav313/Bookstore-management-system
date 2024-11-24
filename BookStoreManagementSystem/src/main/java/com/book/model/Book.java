@@ -5,11 +5,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "books") // Ensure this matches your actual table name in MySQL
+@Table(name = "books")
 public class Book {
 
     @Id
-    private int id; // En
+    private int id; 
 	    private String title;
 	    private String author;
 	    private double price;
@@ -56,16 +56,6 @@ public class Book {
 			this.price = price;
 			this.description = description;
 		}
-
-		/*
-		 * @Override public String toString() { return "Book [id=" + id + ", title=" +
-		 * title + ", author=" + author + ", price=" + price + ", description=" +
-		 * description + ", getId()=" + getId() + ", getTitle()=" + getTitle() +
-		 * ", getAuthor()=" + getAuthor() + ", getPrice()=" + getPrice() +
-		 * ", getDescription()=" + getDescription() + ", getClass()=" + getClass() +
-		 * ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]"; }
-		 */
-
 		
 		@Override
 	    public String toString() {

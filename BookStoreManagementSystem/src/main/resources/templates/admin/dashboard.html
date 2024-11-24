@@ -4,26 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/bookList.css">
 </head>
 <body>
     <h1>Admin Dashboard</h1>
-    <h3>Book List</h3>
-    <a href="/admin/bookList">View All Books</a>
+    <a href="/admin/bookList">Edit Books</a>
+    <br>
     <a href="/admin/addBook">Add New Book</a>
     <ul>
-        <th:block th:each="book : ${books}">
-            <li>
-            	<span th:text="${book.id}">Book ID</span>
-                <span th:text="${book.title}">Book Title</span> - 
-                <span th:text="${book.author}">Book Author</span>
-                <span th:text="${book.price}">Book Price</span>
-                <a th:href="@{/admin/edit/{id}(id=${book.id})}">Edit</a>
-                <form th:action="@{/admin/deleteBook/{id}(id=${book.id})}" method="post" style="display:inline;">
-                    <button type="submit">Delete</button>
-                </form>
-            </li>
-        </th:block>
+        <table>
+        <thead>
+            <tr>
+                <th>Book ID</th>
+                <th>Book Title</th>
+                <th>Book Author</th>
+                <th>Book Price</th>
+               
+            </tr>
+        </thead>
+        <tbody>
+            <th:block th:each="book : ${books}">
+                <tr>
+                    <td th:text="${book.id}">Book ID</td>
+                    <td th:text="${book.title}">Book Title</td>
+                    <td th:text="${book.author}">Book Author</td>
+                    <td><strong>Rs. <span th:text="${book.price}">Book Price</span></strong></td>
+                    
+                </tr>
+            </th:block>
+        </tbody>
+    </table>
     </ul>
 </body>
 </html>

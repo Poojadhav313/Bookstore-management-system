@@ -4,26 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Book</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/addBook.css"> <!-- Use the same CSS file -->
 </head>
 <body>
     <h1>Edit Book</h1>
+
     <form th:action="@{/admin/editBook/{id}(id=${book.id})}" method="POST">
+        <input type="hidden" th:value="${book.id}" name="id" />  <!-- Include the book ID -->
 
-    <input type="hidden" th:value="${book.id}" name="id" />  <!-- Include the book ID -->
+        <div class="form-group">
+            <label for="title">Title:</label>
+            <input type="text" th:value="${book.title}" name="title" required />
+        </div>
 
-    <label for="title">Title:</label>
-    <input type="text" th:value="${book.title}" name="title" required />
+        <div class="form-group">
+            <label for="author">Author:</label>
+            <input type="text" th:value="${book.author}" name="author" required />
+        </div>
 
-    <label for="author">Author:</label>
-    <input type="text" th:value="${book.author}" name="author" required />
+        <div class="form-group">
+            <label for="price">Price:</label>
+            <input type="number" th:value="${book.price}" name="price" required />
+        </div>
 
-    <label for="price">Price:</label>
-    <input type="number" th:value="${book.price}" name="price" required />
+        <div class="form-group">
+            <button type="submit">Save Changes</button>
+        </div>
+    </form>
 
-    <button type="submit">Save Changes</button>
-</form>
-
-    <a href="/admin/dashboard">Back to Dashboard</a>
+    <a href="/admin/dashboard" class="back-link">Back to Dashboard</a>
 </body>
 </html>
