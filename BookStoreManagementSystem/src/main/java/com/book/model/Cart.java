@@ -1,45 +1,44 @@
 package com.book.model;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-
-import com.book.service.BookService;
 
 public class Cart {
-    // Store book IDs (instead of Book objects)
-    private Set<Integer> bookIds = new HashSet<>();
 
-    // Add a book by its ID
-    public void addBook(int bookId) {
-        bookIds.add(bookId);
+    private List<Book> books = new ArrayList<>();
+
+    // Add a book to the cart
+    public void addBook(Book book) {
+        this.books.add(book);
     }
 
-    // Remove a book by its ID
-    public void removeBook(int bookId) {
-        bookIds.remove(bookId);
+    // Remove a book from the cart
+    public void removeBook(Book book) {
+        this.books.remove(book);
     }
 
-    // Get the set of book IDs in the cart
-    public Set<Integer> getBookIds() {
-        return bookIds;
-    }
-
-    // Get the total price of books in the cart
-    public double getTotalPrice(BookService bookService) {
-        double totalPrice = 0.0;
-        for (Integer bookId : bookIds) {
-            Book book = bookService.getBookById(bookId);
-            if (book != null) {
-                totalPrice += book.getPrice();
-            }
-        }
-        return totalPrice;
+    // Remove a book from the cart based on a condition (removeIf)
+    public void removeIf(Book book) {
+        this.books.removeIf(b -> b.getId() == book.getId()); // Remove by book ID
     }
 
     // Clear the cart
-    public void clear() {
-        bookIds.clear();
+    public void clearCart() {
+        this.books.clear(); // This is the standard List clear method
+    }
+
+    // Get the total price of all books in the cart
+    public double getTotalPrice() {
+        return books.stream().mapToDouble(Book::getPrice).sum();
+    }
+
+    // Getter for the books
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    // Setter for the books
+    public void setBooks(List<Book> books) {
+        this.books = books;
     }
 }

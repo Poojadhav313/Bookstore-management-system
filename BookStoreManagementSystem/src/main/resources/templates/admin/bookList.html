@@ -10,7 +10,6 @@
     <h1>All Books</h1>
     <a href="/admin/dashboard">Back to Dashboard</a>
     <ul>
-        <!-- Loop through books and display -->
         <th:block th:each="book : ${books}">
             <li>
                 <span th:text="${book.title}">Book Title</span> - 

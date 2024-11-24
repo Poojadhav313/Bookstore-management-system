@@ -8,23 +8,22 @@
 </head>
 <body>
     <h1>Edit Book</h1>
-    <form action="/admin/editBook/{id}" method="post">
-        <div>
-            <label for="title">Title:</label>
-            <input type="text" id="title" name="title" th:value="${book.title}" required>
-        </div>
-        <div>
-            <label for="author">Author:</label>
-            <input type="text" id="author" name="author" th:value="${book.author}" required>
-        </div>
-        <div>
-            <label for="price">Price:</label>
-            <input type="number" id="price" name="price" th:value="${book.price}" step="0.01" required>
-        </div>
-        <div>
-            <button type="submit">Save Changes</button>
-        </div>
-    </form>
+    <form th:action="@{/admin/editBook/{id}(id=${book.id})}" method="POST">
+
+    <input type="hidden" th:value="${book.id}" name="id" />  <!-- Include the book ID -->
+
+    <label for="title">Title:</label>
+    <input type="text" th:value="${book.title}" name="title" required />
+
+    <label for="author">Author:</label>
+    <input type="text" th:value="${book.author}" name="author" required />
+
+    <label for="price">Price:</label>
+    <input type="number" th:value="${book.price}" name="price" required />
+
+    <button type="submit">Save Changes</button>
+</form>
+
     <a href="/admin/dashboard">Back to Dashboard</a>
 </body>
 </html>

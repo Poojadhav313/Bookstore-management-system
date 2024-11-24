@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import com.book.model.Book;
 import com.book.repository.BookRepository;
 
-
 @Service
 public class BookService {
 
@@ -50,4 +49,3 @@ public class BookService {
         return bookRepository.findByAuthorContaining(author);
     }
 }
-

@@ -8,11 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.servlet.http.HttpSession;
-
 @Service
 public class CartService {
 
@@ -26,37 +21,32 @@ public class CartService {
     // Add a book to the cart using its ID
     public void addToCart(int bookId, User user) {
         Cart cart = user.getCart();
-        cart.addBook(bookId);
+        Book book = bookService.getBookById(bookId); // Retrieve book by ID
+        if (book != null) {
+            cart.addBook(book); // Add book to cart
+        }
     }
 
     // Remove a book from the cart using its ID
     public void removeFromCart(int bookId, User user) {
         Cart cart = user.getCart();
-        cart.removeBook(bookId);
+        Book book = bookService.getBookById(bookId); // Retrieve book by ID
+        if (book != null) {
+            cart.removeBook(book); // Remove book from cart
+        }
     }
 
     // Get cart details (including Book objects) and add it to the model
     public void getCartSummary(Model model, User user) {
         Cart cart = user.getCart();
-        Set<Integer> bookIds = cart.getBookIds();
-        double totalPrice = 0.0;
-        Set<Book> booksInCart = new HashSet<>();
-        
-        for (Integer bookId : bookIds) {
-            Book book = bookService.getBookById(bookId);
-            if (book != null) {
-                booksInCart.add(book);
-                totalPrice += book.getPrice();
-            }
-        }
-
-        model.addAttribute("books", booksInCart);  // List of books in cart
+        double totalPrice = cart.getTotalPrice();
+        model.addAttribute("books", cart.getBooks()); // List of books in cart
         model.addAttribute("totalPrice", totalPrice);  // Total price of books in the cart
     }
 
     // Clear the cart
     public void clearCart(User user) {
         Cart cart = user.getCart();
-        cart.clear();
+        cart.clearCart(); // Call the clearCart method to remove all books
     }
 }

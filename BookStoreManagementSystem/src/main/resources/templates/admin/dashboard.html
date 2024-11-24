@@ -12,11 +12,12 @@
     <a href="/admin/bookList">View All Books</a>
     <a href="/admin/addBook">Add New Book</a>
     <ul>
-        <!-- Loop through books and display -->
         <th:block th:each="book : ${books}">
             <li>
+            	<span th:text="${book.id}">Book ID</span>
                 <span th:text="${book.title}">Book Title</span> - 
                 <span th:text="${book.author}">Book Author</span>
+                <span th:text="${book.price}">Book Price</span>
                 <a th:href="@{/admin/edit/{id}(id=${book.id})}">Edit</a>
                 <form th:action="@{/admin/deleteBook/{id}(id=${book.id})}" method="post" style="display:inline;">
                     <button type="submit">Delete</button>

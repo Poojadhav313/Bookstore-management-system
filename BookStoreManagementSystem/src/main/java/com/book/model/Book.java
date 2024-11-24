@@ -57,17 +57,20 @@ public class Book {
 			this.description = description;
 		}
 
-		@Override
-		public String toString() {
-			return "Book [id=" + id + ", title=" + title + ", author=" + author + ", price=" + price + ", description="
-					+ description + ", getId()=" + getId() + ", getTitle()=" + getTitle() + ", getAuthor()="
-					+ getAuthor() + ", getPrice()=" + getPrice() + ", getDescription()=" + getDescription()
-					+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
-					+ "]";
-		}
+		/*
+		 * @Override public String toString() { return "Book [id=" + id + ", title=" +
+		 * title + ", author=" + author + ", price=" + price + ", description=" +
+		 * description + ", getId()=" + getId() + ", getTitle()=" + getTitle() +
+		 * ", getAuthor()=" + getAuthor() + ", getPrice()=" + getPrice() +
+		 * ", getDescription()=" + getDescription() + ", getClass()=" + getClass() +
+		 * ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]"; }
+		 */
 
 		
-		
+		@Override
+	    public String toString() {
+	        return "Book [title=" + title + ", author=" + author + ", price=" + price + "]";
+	    }
 
 
 }

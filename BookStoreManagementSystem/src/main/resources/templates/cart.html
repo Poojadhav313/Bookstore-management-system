@@ -1,4 +1,3 @@
-<!-- user/cart.html -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,13 +11,13 @@
             <li th:each="book : ${books}">
                 <span th:text="${book.title}"></span> - 
                 <span th:text="${book.price}"></span>
-                <form th:action="@{/cart/remove/{bookId}(bookId=${book.id}, userId=${user.id})}" method="POST">
+                <form th:action="@{/user/cart/remove/{bookId}(bookId=${book.id}, userId=${user.id})}" method="POST">
                     <button type="submit">Remove</button>
                 </form>
             </li>
         </ul>
         <h3>Total Price: <span th:text="${totalPrice}"></span></h3>
-        <form th:action="@{/cart/clear(userId=${user.id})}" method="POST">
+        <form th:action="@{/user/cart/clear/{userId}(userId=${user.id})}" method="POST">
             <button type="submit">Clear Cart</button>
         </form>
     </div>

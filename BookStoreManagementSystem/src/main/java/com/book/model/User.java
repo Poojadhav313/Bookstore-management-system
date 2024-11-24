@@ -6,19 +6,30 @@ import jakarta.persistence.Transient;
 
 @Entity
 public class User {
-	@Id
-	private int id;
-	private String username;
+
+    @Id
+    private int id;
+    private String username;
     private String password;
     private String role;
-    
- // Add a Cart field to the User class
+
+    // Add a Cart field to the User class, not persisted to the database
     @Transient
     private Cart cart;
 
     // Default constructor
     public User() {
         this.cart = new Cart(); // Initialize the cart when the user is created
+    }
+
+    // Constructor with parameters
+    public User(int id, String username, String password, String role) {
+        super();
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.role = role;
+        this.cart = new Cart(); // Initialize the cart for the user
     }
 
     // Getter and Setter for Cart
@@ -63,22 +74,14 @@ public class User {
         this.role = role;
     }
 
-    // Constructor with parameters
-    public User(int id, String username, String password, String role) {
-        super();
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.role = role;
-        this.cart = new Cart(); // Initialize the cart for the user
+    // Add a method to add a book to the cart
+    public void addToCart(Book book) {
+        this.cart.addBook(book); // Add the book to the cart's list of books
     }
 
+    // Override toString method to print User object info
     @Override
     public String toString() {
         return "User [id=" + id + ", username=" + username + ", password=" + password + ", role=" + role + "]";
     }
-	
-	
-	
-
 }

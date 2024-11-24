@@ -12,15 +12,23 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    // Register user
+    public void registerUser(User user) {
+        userRepository.save(user);
+    }
+
+    // Get user by username
+    public User getUserByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
+
+    // Get user by ID
     public User getUserById(int id) {
         return userRepository.findById(id).orElse(null);
     }
 
-    public User registerUser(User user) {
-        return userRepository.save(user);
-    }
-
-    public User getUserByUsername(String username) {
-        return userRepository.findByUsername(username);
+    // Update user (to save changes to the cart)
+    public void updateUser(User user) {
+        userRepository.save(user);
     }
 }
