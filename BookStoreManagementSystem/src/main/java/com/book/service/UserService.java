@@ -7,17 +7,20 @@ import com.book.model.User;
 import com.book.repository.UserRepository;
 
 @Service
-	public class UserService {
+public class UserService {
 
-	    @Autowired
-	    private UserRepository userRepository;
+    @Autowired
+    private UserRepository userRepository;
 
-	    // Method to get user by username
-	    public User getUserByUsername(String username) {
-	        return userRepository.getUserByUsername(username);
-	    }
-	}
+    public User getUserById(int id) {
+        return userRepository.findById(id).orElse(null);
+    }
 
+    public User registerUser(User user) {
+        return userRepository.save(user);
+    }
 
-
-
+    public User getUserByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
+}

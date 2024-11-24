@@ -8,38 +8,46 @@ import org.springframework.stereotype.Service;
 import com.book.model.Book;
 import com.book.repository.BookRepository;
 
+
 @Service
-	public class BookService {
+public class BookService {
 
-	    @Autowired
-	    private BookRepository bookRepository;
+    @Autowired
+    private BookRepository bookRepository;
 
-	    // Method to get all books
-	    public List<Book> getAllBooks() {
-	        return bookRepository.getAllBooks();
-	    }
+    // Get all books
+    public List<Book> getAllBooks() {
+        return bookRepository.findAll();
+    }
 
-	    // Method to add a new book
-	    public int addBook(Book book) {
-	        return bookRepository.addBook(book);
-	    }
+    // Get book by ID
+    public Book getBookById(int id) {
+        return bookRepository.findById(id).orElse(null);
+    }
 
-	    // Method to update a book
-	    public int updateBook(Book book) {
-	        return bookRepository.updateBook(book);
-	    }
+    // Add a new book
+    public Book addBook(Book book) {
+        return bookRepository.save(book);
+    }
 
-	    // Method to delete a book
-	    public int deleteBook(int id) {
-	        return bookRepository.deleteBook(id);
-	    }
+    // Update a book
+    public Book updateBook(Book book) {
+        return bookRepository.save(book);
+    }
 
-	    // Method to get book by ID
-	    public Book getBookById(int id) {
-	        return bookRepository.getBookById(id);
-	    }
-	}
+    // Delete a book
+    public void deleteBook(int id) {
+        bookRepository.deleteById(id);
+    }
 
+    // Find books by title
+    public List<Book> findBooksByTitle(String title) {
+        return bookRepository.findByTitleContaining(title);
+    }
 
-
+    // Find books by author
+    public List<Book> findBooksByAuthor(String author) {
+        return bookRepository.findByAuthorContaining(author);
+    }
+}
 

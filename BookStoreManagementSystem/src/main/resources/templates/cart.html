@@ -1,0 +1,26 @@
+<!-- user/cart.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shopping Cart</title>
+</head>
+<body>
+    <h2>Your Cart</h2>
+    <div>
+        <h3>Books in Cart:</h3>
+        <ul>
+            <li th:each="book : ${books}">
+                <span th:text="${book.title}"></span> - 
+                <span th:text="${book.price}"></span>
+                <form th:action="@{/cart/remove/{bookId}(bookId=${book.id}, userId=${user.id})}" method="POST">
+                    <button type="submit">Remove</button>
+                </form>
+            </li>
+        </ul>
+        <h3>Total Price: <span th:text="${totalPrice}"></span></h3>
+        <form th:action="@{/cart/clear(userId=${user.id})}" method="POST">
+            <button type="submit">Clear Cart</button>
+        </form>
+    </div>
+</body>
+</html>

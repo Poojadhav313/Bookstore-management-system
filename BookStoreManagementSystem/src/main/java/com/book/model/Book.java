@@ -1,8 +1,15 @@
 package com.book.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "books") // Ensure this matches your actual table name in MySQL
 public class Book {
-	    
-		private int id;
+
+    @Id
+    private int id; // En
 	    private String title;
 	    private String author;
 	    private double price;

@@ -1,16 +1,11 @@
 package com.book.controller;
 
+import com.book.model.Book;
+import com.book.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.book.model.Book;
-import com.book.service.BookService;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/admin")
@@ -19,49 +14,50 @@ public class AdminController {
     @Autowired
     private BookService bookService;
 
-    @GetMapping("/")
-    public String adminDashboard() {
+    // Admin dashboard
+    @GetMapping("/dashboard")
+    public String getDashboard(Model model) {
+        model.addAttribute("books", bookService.getAllBooks());
         return "admin/dashboard";
     }
-
-    @GetMapping("/books")
-    public String viewBooks(Model model) {
+    
+    @GetMapping("/bookList")
+    public String getall(Model model) {
         model.addAttribute("books", bookService.getAllBooks());
         return "admin/bookList";
     }
-    
-    @GetMapping("/book/add")
-    public String addBookForm() {
+
+    // Add new book
+    @GetMapping("/addBook")
+    public String showAddBookForm(Model model) {
+        model.addAttribute("book", new Book());
         return "admin/addBook";
     }
 
-    @PostMapping("/book/add")
-    public String addBook(@ModelAttribute Book book) {
+    @PostMapping("/addBook")
+    public String addBook(@ModelAttribute("book") Book book) {
         bookService.addBook(book);
-        return "redirect:/admin/books";
+        return "redirect:/admin/dashboard";
     }
 
-    @GetMapping("/book/edit/{id}")
-    public String editBookForm(@PathVariable int id, Model model) {
+    // Edit book
+    @GetMapping("/edit/{id}")
+    public String showEditBookForm(@PathVariable("id") int id, Model model) {
         model.addAttribute("book", bookService.getBookById(id));
         return "admin/editBook";
     }
-    
-    @PostMapping("/book/edit/{id}")
-    public String updateBook(@PathVariable int id, @ModelAttribute Book book) {
+
+    @PostMapping("/editBook/{id}")
+    public String editBook(@PathVariable("id") int id, @ModelAttribute("book") Book book) {
         book.setId(id);
         bookService.updateBook(book);
-        return "redirect:/admin/books";
+        return "redirect:/admin/dashboard";
     }
 
-    @GetMapping("/book/delete/{id}")
-    public String deleteBook(@PathVariable int id) {
+    // Delete book
+    @PostMapping("/deleteBook/{id}")
+    public String deleteBook(@PathVariable("id") int id) {
         bookService.deleteBook(id);
-        return "redirect:/admin/books";
+        return "redirect:/admin/dashboard";
     }
- 
 }
-
-
-
-

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book List</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <h1>All Books</h1>
+    <a href="/admin/dashboard">Back to Dashboard</a>
+    <ul>
+        <!-- Loop through books and display -->
+        <th:block th:each="book : ${books}">
+            <li>
+                <span th:text="${book.title}">Book Title</span> - 
+                <span th:text="${book.author}">Book Author</span>
+                <a th:href="@{/admin/edit/{id}(id=${book.id})}">Edit</a>
+                <form th:action="@{/admin/deleteBook/{id}(id=${book.id})}" method="post" style="display:inline;">
+                    <button type="submit">Delete</button>
+                </form>
+            </li>
+        </th:block>
+    </ul>
+</body>
+</html>

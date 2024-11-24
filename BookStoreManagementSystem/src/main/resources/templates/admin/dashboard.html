@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <h1>Admin Dashboard</h1>
+    <h3>Book List</h3>
+    <a href="/admin/bookList">View All Books</a>
+    <a href="/admin/addBook">Add New Book</a>
+    <ul>
+        <!-- Loop through books and display -->
+        <th:block th:each="book : ${books}">
+            <li>
+                <span th:text="${book.title}">Book Title</span> - 
+                <span th:text="${book.author}">Book Author</span>
+                <a th:href="@{/admin/edit/{id}(id=${book.id})}">Edit</a>
+                <form th:action="@{/admin/deleteBook/{id}(id=${book.id})}" method="post" style="display:inline;">
+                    <button type="submit">Delete</button>
+                </form>
+            </li>
+        </th:block>
+    </ul>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Book</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <h1>Edit Book</h1>
+    <form action="/admin/editBook/{id}" method="post">
+        <div>
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" th:value="${book.title}" required>
+        </div>
+        <div>
+            <label for="author">Author:</label>
+            <input type="text" id="author" name="author" th:value="${book.author}" required>
+        </div>
+        <div>
+            <label for="price">Price:</label>
+            <input type="number" id="price" name="price" th:value="${book.price}" step="0.01" required>
+        </div>
+        <div>
+            <button type="submit">Save Changes</button>
+        </div>
+    </form>
+    <a href="/admin/dashboard">Back to Dashboard</a>
+</body>
+</html>
